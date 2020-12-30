@@ -144,3 +144,54 @@ public class Team {
   - 연관관계의 주인만이 외래키를 관리(등록, 수정)
   - 주인이 아닌쪽은 읽기만 가능
   - 주인이 아니면 mappedBy
+  
+  
+# 공통 Tips
+### SQL 로그
+- 외부라이브러리 : https://github.com/gavlyukovskiy/spring-boot-data-source-decorator 
+  <br/>
+  사용으로 sql 값 확인 가능
+
+### 관계
+- Entity 간 관계는 m:m 은 사용하지 말자 주로 ManyToOne 사용을 권장
+  - 중간 테이블에 다른 컬럼을 추가할 수 없고 세밀하게 쿼리를 실행하기 힘들다. 중간엔티티를 추가해 OneToMany ,ManyToOne 를 사용하자.
+
+### @Getter @Setter
+- @Getter는 모두 열어두는 것이 편리하다.
+  - 조회를 많이 한다해도 데이터의 변경이 일어나지 않는다.)
+- @Setter의 경우 꼭 필요한 곳에서만 사용하도록 한다. 
+  - 도대체 왜 변경되는지 추적이 불가능 할 수 있다.
+  - @Setter 대신 변경 지점이 명확하도록 비즈니스 메서드를 별도 제공하는 것이 좋다
+  - 값타입을 변경 불가능하게 만들자
+  ```java
+  //ex) protected 사용
+  protected Address(){
+
+  }
+  ```
+
+### 식별자
+- 관례상 (테이블명+id)로 하는 것이 좋다(일관성) 
+
+### 지연로딩
+- 즉시로딩 `Eager`는 예측이 어렵고 어떤 SQL이 실행될지 추적이 어렵다. 특히 JPQL을 사용할 때에 N+1 문제가 발생한다.
+- 지연로딩 `LAZY`를 사용하자.
+- 연관된 엔티티를 DB에서 함꼐 조회 한다고 하면 fetch join 과 엔티티 그래프 기능을 사용하자.
+- @XToOne 관계는 기본이 즉시로딩이므로 직접 `LAZY`로 설정해야함.
+
+### 컬렉션 초기화
+- 필드에서 바로 초기화 하는 것이 안전하다.
+  - null 문제에서 안전
+  - 하이버네이트는 엔티티를 영속화 할 때, 컬랙션을 감싸서 하이버네이트가 제공하는 내장 컬렉션으로 변경한다. 만약 임의의 메서드에서 컬력션을 잘못 생성하면 하이버네이트 내부 메커니즘에 문제가 발생할 수 있다.
+  ```java
+  List<Order> orders = new List<Order>(){};
+  ```
+
+### 테이블 컬럼명 매핑
+- 논리명 생성: 명시적으로 컬럼, 테이블명을 직접 적지 않으면 ```ImplicitNamingStrategy``` 사용
+```spring.jpa.hibernate.naming.implicit-strategy``` : 테이블이나, 컬럼명을 명시하지 않을 때 논리명
+적용,
+- 물리명 적용: ```spring.jpa.hibernate.naming.physical-strategy``` : 모든 논리명에 적용됨, 실제 테이블에 적용
+(username usernm 등으로 회사 룰로 바꿀 수 있음)
+
+
