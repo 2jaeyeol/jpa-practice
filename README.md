@@ -21,5 +21,63 @@
 - ORM 프레임워크가 중간에서 매핑
 - 대중적인 언어에는 대부분 ORM 기술이 있음
 
-#JPA 동작
+# JPA 동작
+- ## 주의점
+  - Entity Manager Factory 는 하나만 생성해서 애플리케이션 전체에서 공유
+  - EntityManager는 쓰레드간에 공유x (사용하고 버려야 함.)
+  - JPA의 모든 데이터 변경은 트랜잭션 안에서 실행
  
+# JPQL
+--
+
+# 영속성 컨텍스트
+- ## 이점
+  - 1차캐시
+  - 동일성 보장
+  - 트랜잭션을 지원하는 쓰기 지연
+  ```java
+  //커밋하는 순간 SQL을 보낸다.
+  transaction.commit();
+  ```
+  - 변경감지 , 지연로딩
+- ## 상태
+  - 비영속(new/transient) : 영속성 컨텐스트와 전혀 관계없는 새로운 상태
+  ```java
+  //객체생성(비영속)
+  Member member = new Member();
+  member.setId("member1");
+  member.setUsename("회원1");
+  ```
+  - 영속(managed) : 영속성 컨텍스트에 관리되는 상태
+  ```java
+  Member member = new Member();
+  member.setId("member1");
+  member.setUsename("회원1");
+  
+  EntityManager em = emf.createEntityManager();
+  em.getTransaction().begin();
+  
+  //객체저장(영속)
+  em.persist(member);
+  ```
+  - 준영속(detached) : 영속성 컨텍스트에 저장되었다가 분리된 상태
+  ```java
+  //영속성 컨텍스트에서 분리
+  em.detach(member);
+  em.clear();
+  em.close();
+  ```
+  - 삭제(removed) : 삭제된 상태
+  ```java
+  //삭제
+  em.remove(member);
+  ```
+  
+# 엔티티 매핑
+
+# 연관관계 매핑
+<img src="/Users/jaeyeol/Desktop/aaa.png"  width="700" height="370">
+
+  
+  
+  
