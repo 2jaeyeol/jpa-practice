@@ -3,12 +3,12 @@
 
 # 목차
  - [DB 객체 관계 구조](#db-객체-관계-구조)
- - [Member](member)
- - [Order](order)
- - [Delivery](Delivery)
- - [OrderItem](Orderitem)
- - [Item](item)
- - [Category](category)
+ - [Member](#member)
+ - [Order](#order)
+ - [Delivery](#Delivery)
+ - [OrderItem](#Orderitem)
+ - [Item](#item)
+ - [Category](#category)
  - [Address](#address)
 <br/><br/>
 
