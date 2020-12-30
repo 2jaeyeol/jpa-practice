@@ -76,8 +76,64 @@
 # 엔티티 매핑
 
 # 연관관계 매핑
-<img src="/Users/jaeyeol/Desktop/aaa.png"  width="700" height="370">
+<img src="./Users/jaeyeol/Desktop/aaa.png"  width="700" height="370">
 
-  
-  
-  
+- ## 단방향 연관관계
+ ```java
+@Entity
+public class Member {
+
+  //@Column(name = "TEAM_ID") 
+  //private Long teamId;
+
+  @ManyToOne
+  @JoinColumn(name = "TEAM_ID")
+  private Team team;
+}
+ ```
+ 
+- ## 연관관계 저장
+ ```java
+ Team team = new Team();
+ team.setName("TeamA");
+ em.persist(team);
+ 
+ Member member = new Member();
+ member.setName("member1");
+ member.setTeam(team);
+ em.persist(member);
+ 
+ //조회
+ Member findMember = em.find(Member.class, member.getId());
+ Team findTeam = findMember.getTeam();
+ ```
+ 
+- ## 양방향 연관관계
+ ```java
+@Entity
+public class Member {
+
+  //@Column(name = "TEAM_ID") 
+  //private Long teamId;
+
+  @ManyToOne
+  @JoinColumn(name = "TEAM_ID")
+  private Team team;
+}
+
+@Entity
+public class Team {
+  @OnetoMany(mappedBy = "team")
+  List<Member> members = new ArrayList<Member>();
+ } 
+ 
+ //조회
+ Team findTeam = em.find(Team.class, team.getId());
+ int memberSize = findTeam.getMembers().size();
+ ```
+ 
+- ## 연관관계의 주인(외래키가 있는 곳을 주인으로 하는게 좋음)
+  - 객체의 두 관계중 하나를 연관관계의 주인으로 지정
+  - 연관관계의 주인만이 외래키를 관리(등록, 수정)
+  - 주인이 아닌쪽은 읽기만 가능
+  - 주인이 아니면 mappedBy
