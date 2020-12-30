@@ -74,10 +74,13 @@
 # 엔티티 매핑
 
 # 연관관계 매핑
-<img src="./Users/jaeyeol/Desktop/aaa.png"  width="700" height="370">
+
 
 - ## 단방향 연관관계
- ```java
+
+<img src="https://media.vlpt.us/images/2jaeyeol/post/460bd167-1358-4c83-b11b-2924635fc38b/aaa.png"  width="700" height="370">
+
+```java
 @Entity
 public class Member {
 
@@ -107,6 +110,9 @@ public class Member {
  ```
  
 - ## 양방향 연관관계
+
+<img src="https://media.vlpt.us/images/2jaeyeol/post/506997c6-5df1-4a1f-8c76-78607a7594d1/%E1%84%8B%E1%85%A3%E1%86%BC%E1%84%87%E1%85%A1%E1%86%BC%E1%84%92%E1%85%A3%E1%86%BC.png"  width="700" height="370">
+
  ```java
 @Entity
 public class Member {
