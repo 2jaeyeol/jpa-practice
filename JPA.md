@@ -1,5 +1,3 @@
-# jpa-practice
-
 # JPA
 - Java Persistence API
 - 자바 진영의 ORM 기술 표준
