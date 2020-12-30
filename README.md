@@ -1,3 +1,6 @@
+# 연관
+ - JPA 연습 (https://github.com/2jaeyeol/jpa-practice/blob/main/jpashop/JPASHOP.md)
+
 # JPA
 - Java Persistence API
 - 자바 진영의 ORM 기술 표준
