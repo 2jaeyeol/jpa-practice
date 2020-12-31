@@ -10,7 +10,7 @@
  - [Item](#item)
  - [Category](#category)
  - [Address](#address)
- - [공통 Tips](#공통 tips)
+ - [공통 Tips](#공통-tips)
 <br/><br/>
 
 # DB 객체 관계 구조
