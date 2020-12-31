@@ -131,7 +131,7 @@ public class Member {
 @Entity
 public class Team {
   @OnetoMany(mappedBy = "team")
-  List<Member> members = new ArrayList<Member>();
+  List<Member> members = new ArrayList<>();
  } 
  
  //조회
@@ -184,7 +184,7 @@ public class Team {
   - null 문제에서 안전
   - 하이버네이트는 엔티티를 영속화 할 때, 컬랙션을 감싸서 하이버네이트가 제공하는 내장 컬렉션으로 변경한다. 만약 임의의 메서드에서 컬력션을 잘못 생성하면 하이버네이트 내부 메커니즘에 문제가 발생할 수 있다.
   ```java
-  List<Order> orders = new List<Order>(){};
+  List<Order> orders = new List<>();
   ```
 
 ### 테이블 컬럼명 매핑
