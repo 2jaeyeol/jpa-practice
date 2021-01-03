@@ -28,4 +28,8 @@ public class ItemService {
     public Item findOne(Long itemId){
         return itemRepogitory.findOne(itemId);
     }
+
+    public List<Item> findItems() {
+        return itemRepogitory.findAll();
+    }
 }
