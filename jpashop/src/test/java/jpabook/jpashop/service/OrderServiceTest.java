@@ -4,6 +4,7 @@ import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
+import jpabook.jpashop.domain.exception.NotEnoughStockException;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repogitory.OrderRepogitory;
@@ -45,12 +46,15 @@ public class OrderServiceTest {
 
         //then
         Order getOrder = orderRepogitory.findOne(orderId);
-
         assertEquals("상품 주문시 상태는 ORDER", OrderStatus.ORDER, getOrder.getStatus());
+        assertEquals("주문한 상품 수가 정확해야 한다.", 1, getOrder.getOrderItems().size());
+        assertEquals("주문 가격은 가격 * 수량이다.", 10000 * orderCount, getOrder.getTotalPrice() );
+        assertEquals("주문 수량만큼  재고가 줄어야한다. ",8,book.getStockQuantity());
 
 
 
     }
+
     public void 주문취소() throws Exception{
         //given
 
@@ -59,6 +63,7 @@ public class OrderServiceTest {
         //then
 
     }
+    @Test(expected = NotEnoughStockException.class)
     public void 상품주문_재고수량초과() throws Exception{
         //given
 
