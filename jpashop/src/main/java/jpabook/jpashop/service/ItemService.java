@@ -32,4 +32,9 @@ public class ItemService {
     public List<Item> findItems() {
         return itemRepogitory.findAll();
     }
+
+    @Transactional
+    public void updateItem(Long id, String name, int price) {
+        Item item = itemRepogitory.findOne(id); item.setName(name); item.setPrice(price);
+    }
 }
