@@ -4,8 +4,10 @@ package jpabook.jpashop.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,8 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
+    //@Column(nullable = false)
+    @NotEmpty
     private String name;
 
     @Embedded
