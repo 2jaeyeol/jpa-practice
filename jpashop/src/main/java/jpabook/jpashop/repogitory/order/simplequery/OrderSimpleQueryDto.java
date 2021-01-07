@@ -1,4 +1,4 @@
-package jpabook.jpashop.repogitory;
+package jpabook.jpashop.repogitory.order.simplequery;
 
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;

@@ -64,13 +64,5 @@ public class OrderRepogitory {
         ).getResultList();
     }
 
-    public List<OrderSimpleQueryDto> findOrderDtos() {
-        return em.createQuery(
-                "select new jpabook.jpashop.repogitory.OrderSimpleQueryDto(o.id, m.name,\n" +
-                        "o.orderDate, o.status, d.address) " +
-                        " from Order o" +
-                        " join fetch o.member m" +
-                        " join fetch o.delivery d", OrderSimpleQueryDto.class
-        ).getResultList();
-    }
+
 }
